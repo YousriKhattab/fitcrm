@@ -1,14 +1,14 @@
-# FitCRM – Simple Client Manager for Fitness Programs
+# ClientLift – Simple Client Manager for Fitness Programs
 
 ## 📋 Project Description
 
-FitCRM is a lightweight, frontend-only CRM (Customer Relationship Management) web application designed specifically for fitness professionals, including fitness instructors, personal trainers, and small gym owners. The application helps manage basic client information and track their fitness goals in a simple, intuitive interface.
+ClientLift is a lightweight, frontend-only CRM (Customer Relationship Management) web application designed specifically for fitness professionals, including fitness instructors, personal trainers, and small gym owners. The application helps manage basic client information and track their fitness goals in a simple, intuitive interface.
 
 This project is built with pure HTML and CSS, making it easy to deploy and maintain without requiring backend infrastructure or databases.
 
 ## 🎯 Purpose
 
-The primary purpose of FitCRM is to provide fitness professionals with an easy-to-use tool to:
+The primary purpose of ClientLift is to provide fitness professionals with an easy-to-use tool to:
 - Register new clients with essential information
 - View and manage a list of existing clients
 - Track client fitness goals and membership details
@@ -52,8 +52,8 @@ A responsive table displaying 10 sample clients with:
 ## 📁 File Structure
 
 ```
-fitcrm/
-├── index.html          # New Client Form page
+clientlift/
+├── index.html          # Dashboard page with stats
 ├── clients.html        # Client List View page
 ├── css/
 │   └── styles.css      # All CSS styling
@@ -69,16 +69,16 @@ This project is deployed using **GitHub Pages**, a free static site hosting serv
 ### Deployment Steps:
 
 1. **Create a GitHub Repository**
-   - Create a new public repository named `fitcrm`
+   - Create a new public repository named `clientlift`
    - Initialize with or without README
 
 2. **Push Code to GitHub**
    ```bash
    git init
    git add .
-   git commit -m "Initial commit: FitCRM project"
+   git commit -m "Initial commit: ClientLift project"
    git branch -M main
-   git remote add origin https://github.com/YOUR_USERNAME/fitcrm.git
+   git remote add origin https://github.com/YOUR_USERNAME/clientlift.git
    git push -u origin main
    ```
 
@@ -90,7 +90,7 @@ This project is deployed using **GitHub Pages**, a free static site hosting serv
    - Wait a few minutes for deployment
 
 4. **Access Your Live Site**
-   - Your site will be available at: `https://YOUR_USERNAME.github.io/fitcrm/`
+   - Your site will be available at: `https://YOUR_USERNAME.github.io/clientlift/`
 
 ## 💻 Local Development
 
@@ -98,8 +98,8 @@ To run this project locally:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/fitcrm.git
-   cd fitcrm
+   git clone https://github.com/YOUR_USERNAME/clientlift.git
+   cd clientlift
    ```
 
 2. **Open in browser**
@@ -168,4 +168,4 @@ Created as part of a web development project assignment.
 **Live Demo**: [Your GitHub Pages URL will appear here]
 
 **Repository**: [Your GitHub Repository URL will appear here]
-# fitcrm
+# clientlift
