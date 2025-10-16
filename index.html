@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FitCRM - New Client Form</title>
+    <title>FitCRM - Dashboard</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -12,7 +12,7 @@
         <div class="container">
             <h1 class="logo">FitCRM</h1>
             <ul class="nav-links">
-                <li><a href="index.html" class="active">New Client</a></li>
+                <li><a href="index.html" class="active">Dashboard</a></li>
                 <li><a href="clients.html">Client List</a></li>
             </ul>
         </div>
@@ -20,7 +20,64 @@
 
     <!-- Main Content -->
     <main class="container">
-        <div class="form-container">
+        <div class="dashboard-header">
+            <h2>Dashboard</h2>
+            <p class="subtitle">Overview of your fitness client management</p>
+            <button class="btn btn-primary" onclick="openModal()">+ Add New Client</button>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <!-- Total Clients Card -->
+            <div class="stat-card">
+                <div class="stat-number">10</div>
+                <div class="stat-label">Total Clients</div>
+            </div>
+
+            <!-- New This Month Card -->
+            <div class="stat-card">
+                <div class="stat-number">3</div>
+                <div class="stat-label">New This Month</div>
+            </div>
+
+            <!-- Top Goals Card -->
+            <div class="stat-card stat-card-wide">
+                <div class="stat-label">Top Goals</div>
+                <div class="goals-breakdown">
+                    <div class="goal-item">
+                        <span class="goal-label">Weight Loss:</span>
+                        <span class="goal-value">3</span>
+                    </div>
+                    <div class="goal-item">
+                        <span class="goal-label">Muscle Gain:</span>
+                        <span class="goal-value">2</span>
+                    </div>
+                    <div class="goal-item">
+                        <span class="goal-label">General Fitness:</span>
+                        <span class="goal-value">2</span>
+                    </div>
+                    <div class="goal-item">
+                        <span class="goal-label">Other:</span>
+                        <span class="goal-value">3</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <h3>Quick Actions</h3>
+            <div class="action-buttons">
+                <a href="clients.html" class="btn btn-secondary">View All Clients</a>
+                <button class="btn btn-secondary" onclick="openModal()">Add Client</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal for Add New Client -->
+    <div id="clientModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
             <h2>Add New Client</h2>
             <p class="subtitle">Fill out the form below to register a new client</p>
             
@@ -115,9 +172,10 @@
                 <!-- Submit Button -->
                 <button type="submit" class="btn btn-primary">Add Client</button>
                 <button type="reset" class="btn btn-secondary">Clear Form</button>
+                <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
             </form>
         </div>
-    </main>
+    </div>
 
     <!-- Footer -->
     <footer>
@@ -125,5 +183,24 @@
             <p>&copy; 2025 FitCRM. Simple Client Management for Fitness Professionals.</p>
         </div>
     </footer>
+
+    <script>
+        // Modal functions
+        function openModal() {
+            document.getElementById('clientModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('clientModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('clientModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
 </body>
 </html>
