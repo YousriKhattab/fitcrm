@@ -29,12 +29,20 @@ This project is built with pure HTML and CSS, making it easy to deploy and maint
 
 **File Structure**
 
-- clientlift/
-   - index.html          # Dashboard page with stats
-   - clients.html        # Client List View page
-   - css/
-      - styles.css        # All CSS styling
-   - assets/
+# ClientLift
+
+**Brief description of the project**
+
+- ClientLift is a lightweight, frontend-only web application designed to help fitness professionals (trainers, instructors, small gym owners) manage basic client information and track fitness goals.
+
+**Tech stack used**
+
+- HTML5
+- CSS3 (Flexbox / Grid)
+
+**Deployment method**
+
+- GitHub Pages (deploy the `main` branch to the repository's Pages site)
       - icons/            # Optional icons folder (for future use)
    - README.md           # Project documentation
 
