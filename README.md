@@ -23,7 +23,7 @@ A lightweight, frontend-only web application designed to help fitness profession
   - Full name validation (minimum 2 characters)
   - Age validation (must be between 1-120)
   - Email format validation
-  - Phone number format validation (###) ###-####
+  - Phone number format validation (Egyptian: 11 digits starting with 01)
   - Required field validation for all inputs
   - Start date validation (cannot be in the future)
 - **Responsive Design**: Works on desktop, tablet, and mobile devices
