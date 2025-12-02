@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClientLift - Client Details</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">ClientLift</h1>
+            <ul class="nav-links">
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="clients.html">Client List</a></li>
+                <li><a href="add-client.html">Add Client</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Client Info Card -->
+        <div class="client-info-card">
+            <h2 class="client-name" id="clientName">Loading...</h2>
+
+            <div class="client-info-grid" id="clientInfo">
+                <!-- Client info will be loaded dynamically -->
+            </div>
+
+            <div class="client-actions">
+                <a href="#" id="editBtn" class="btn btn-secondary">✏️ Edit Client</a>
+                <button id="deleteBtn" class="btn btn-secondary" style="background-color: var(--danger-color);">🗑️
+                    Delete Client</button>
+                <a href="clients.html" class="btn btn-secondary">← Back to List</a>
+            </div>
+        </div>
+
+        <!-- Training History Section -->
+        <div class="training-history-section">
+            <h3>📊 Training History</h3>
+            <p class="no-data">No training sessions recorded yet. This feature will be available in future updates.</p>
+        </div>
+
+        <!-- Suggested Exercises Section -->
+        <div class="exercises-section">
+            <h3>💪 Recommended Exercises for Next Session</h3>
+            <div class="exercises-grid" id="exercisesContainer">
+                <!-- Exercises will be loaded from Wger API -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 ClientLift. Simple Client Management for Fitness Professionals.</p>
+        </div>
+    </footer>
+
+    <!-- Include main.js -->
+    <script src="js/main.js"></script>
+
+    <script>
+        // Get client ID from URL
+        const clientId = getUrlParameter('id');
+
+        // Redirect if no ID provided
+        if (!clientId) {
+            showNotification('No client ID provided', 'error');
+            setTimeout(() => window.location.href = 'clients.html', 1500);
+        } else {
+            // Load and display client data
+            loadClientDetails();
+            // Load exercises from Wger API
+            loadExercises();
+        }
+
+        /**
+         * Load and display client details
+         */
+        function loadClientDetails() {
+            const client = getClientById(clientId);
+
+            if (!client) {
+                showNotification('Client not found', 'error');
+                setTimeout(() => window.location.href = 'clients.html', 1500);
+                return;
+            }
+
+            // Set client name
+            document.getElementById('clientName').textContent = client.fullName;
+
+            // Build info grid
+            const infoGrid = document.getElementById('clientInfo');
+            infoGrid.innerHTML = `
+                <div class="info-item">
+                    <div class="info-label">Email</div>
+                    <div class="info-value">📧 ${escapeHtml(client.email)}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Phone</div>
+                    <div class="info-value">📞 ${escapeHtml(client.phone)}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Age</div>
+                    <div class="info-value">${client.age} years old</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Gender</div>
+                    <div class="info-value">${capitalize(client.gender)}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Fitness Goal</div>
+                    <div class="info-value">
+                        <span class="fitness-goal-badge">${formatGoal(client.fitnessGoal)}</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Membership Start</div>
+                    <div class="info-value">${formatDate(client.startDate)}</div>
+                </div>
+            `;
+
+            // Set up action buttons
+            document.getElementById('editBtn').href = `edit-client.html?id=${clientId}`;
+            document.getElementById('deleteBtn').addEventListener('click', handleDelete);
+        }
+
+        /**
+         * Capitalize first letter
+         */
+        function capitalize(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1).replace(/-/g, ' ');
+        }
+
+        /**
+         * Handle client deletion
+         */
+        function handleDelete() {
+            const client = getClientById(clientId);
+            if (!client) return;
+
+            if (showConfirmDialog(`Are you sure you want to delete ${client.fullName}?\n\nThis action cannot be undone.`)) {
+                if (deleteClient(clientId)) {
+                    showNotification(`${client.fullName} has been deleted`, 'success');
+                    setTimeout(() => window.location.href = 'clients.html', 1000);
+                } else {
+                    showNotification('Failed to delete client', 'error');
+                }
+            }
+        }
+
+        /**
+         * Load exercises from Wger API
+         */
+        async function loadExercises() {
+            const container = document.getElementById('exercisesContainer');
+
+            // Show loading state
+            showLoadingState(container);
+
+            try {
+                // Fetch 5 exercises from Wger API
+                const exercises = await fetchExercises(5);
+
+                // Display exercises
+                displayExercises(exercises, container);
+
+            } catch (error) {
+                console.error('Failed to load exercises:', error);
+                showErrorState(container, 'Failed to load exercise recommendations. Please try again later.');
+            }
+        }
+    </script>
+</body>
+
+</html>

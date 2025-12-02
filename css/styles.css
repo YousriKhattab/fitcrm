@@ -235,8 +235,13 @@ h3 {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 .modal-content {
@@ -256,6 +261,7 @@ h3 {
         transform: translateY(-50px);
         opacity: 0;
     }
+
     to {
         transform: translateY(0);
         opacity: 1;
@@ -322,6 +328,62 @@ h3 {
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
+/* Form validation styles */
+.error-message {
+    color: var(--danger-color);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: block;
+    min-height: 1.2rem;
+}
+
+.input-error {
+    border-color: var(--danger-color) !important;
+    box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.1) !important;
+}
+
+.success-message {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: var(--primary-color);
+    padding: 1rem;
+    border-radius: 4px;
+    border-left: 4px solid var(--primary-color);
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.form-header {
+    margin-bottom: 2rem;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.form-buttons .btn {
+    flex: 1;
+    min-width: 120px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+/* Client list header */
+.client-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.client-list-header h2 {
+    margin-bottom: 0.5rem;
 }
 
 /* ===================================
@@ -646,5 +708,303 @@ footer p {
     .btn-action {
         width: calc(50% - 0.5rem);
         margin: 0.25rem;
+    }
+}
+
+/* ===================================
+   Toast Notifications
+   =================================== */
+
+.notification-toast {
+    position: fixed;
+    top: 100px;
+    right: -400px;
+    min-width: 300px;
+    max-width: 400px;
+    background-color: var(--white);
+    color: var(--text-color);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    z-index: 10000;
+    transition: right 0.3s ease;
+    font-weight: 500;
+    border-left: 4px solid var(--primary-color);
+}
+
+.notification-toast.show {
+    right: 20px;
+}
+
+.notification-success {
+    border-left-color: var(--primary-color);
+    background-color: rgba(76, 175, 80, 0.1);
+    color: var(--primary-color);
+}
+
+.notification-error {
+    border-left-color: var(--danger-color);
+    background-color: rgba(244, 67, 54, 0.1);
+    color: var(--danger-color);
+}
+
+.notification-info {
+    border-left-color: var(--secondary-color);
+    background-color: rgba(33, 150, 243, 0.1);
+    color: var(--secondary-color);
+}
+
+/* ===================================
+   Clickable Table Rows
+   =================================== */
+
+.client-row {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.client-row:hover {
+    background-color: rgba(76, 175, 80, 0.08) !important;
+}
+
+/* ===================================
+   Loading States
+   =================================== */
+
+.loading-spinner {
+    text-align: center;
+    padding: 3rem;
+}
+
+.spinner {
+    border: 4px solid var(--border-color);
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-spinner p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+/* ===================================
+   Error State
+   =================================== */
+
+.error-state {
+    text-align: center;
+    padding: 2rem;
+}
+
+.error-state .error-message {
+    color: var(--danger-color);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.no-data {
+    text-align: center;
+    color: var(--text-light);
+    padding: 2rem;
+    font-style: italic;
+}
+
+/* ===================================
+   Client Detail Page
+   =================================== */
+
+.client-detail-container {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.client-info-card {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem;
+}
+
+.client-name {
+    font-size: 2rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.client-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-label {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.info-value {
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
+
+.fitness-goal-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: rgba(76, 175, 80, 0.1);
+    color: var(--primary-color);
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.client-actions {
+    display: flex;
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+    flex-wrap: wrap;
+}
+
+/* ===================================
+   Training History Section
+   =================================== */
+
+.training-history-section {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem;
+}
+
+.training-history-section h3 {
+    margin-bottom: 1rem;
+}
+
+/* ===================================
+   Exercises Section
+   =================================== */
+
+.exercises-section {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.exercises-section h3 {
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+}
+
+.exercises-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.exercise-card {
+    background-color: var(--bg-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.exercise-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+}
+
+.exercise-number {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 30px;
+    height: 30px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.exercise-card h4 {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-bottom: 0.75rem;
+    padding-right: 40px;
+}
+
+.exercise-description {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-height: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ===================================
+   Responsive Adjustments for New Features
+   =================================== */
+
+@media screen and (max-width: 768px) {
+    .client-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .exercises-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .client-actions {
+        flex-direction: column;
+    }
+
+    .client-actions .btn {
+        width: 100%;
+    }
+
+    .notification-toast {
+        right: -100%;
+        left: 10px;
+        max-width: calc(100% - 20px);
+    }
+
+    .notification-toast.show {
+        right: auto;
+        left: 10px;
     }
 }

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ClientLift - Client List</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="navbar">
@@ -14,6 +16,7 @@
             <ul class="nav-links">
                 <li><a href="index.html">Dashboard</a></li>
                 <li><a href="clients.html" class="active">Client List</a></li>
+                <li><a href="add-client.html">Add Client</a></li>
             </ul>
         </div>
     </nav>
@@ -21,17 +24,17 @@
     <!-- Main Content -->
     <main class="container">
         <div class="client-list-container">
-            <h2>Client List</h2>
-            <p class="subtitle">View and manage all registered clients</p>
-            
+            <div class="client-list-header">
+                <div>
+                    <h2>Client List</h2>
+                    <p class="subtitle">View and manage all registered clients</p>
+                </div>
+                <a href="add-client.html" class="btn btn-primary">+ Add New Client</a>
+            </div>
+
             <!-- Search Box -->
             <div class="search-container">
-                <input 
-                    type="text" 
-                    id="searchBox" 
-                    class="search-input" 
-                    placeholder="Search by client name..."
-                >
+                <input type="text" id="searchBox" class="search-input" placeholder="Search by client name...">
             </div>
 
             <!-- Client Table -->
@@ -47,134 +50,11 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <!-- Sample Client 1 -->
+                    <tbody id="clientTableBody">
+                        <!-- Clients will be loaded dynamically from localStorage -->
                         <tr>
-                            <td data-label="Name">John Smith</td>
-                            <td data-label="Email">john.smith@email.com</td>
-                            <td data-label="Phone">(555) 123-4567</td>
-                            <td data-label="Fitness Goal">Weight Loss</td>
-                            <td data-label="Start Date">2025-01-15</td>
-                            <td data-label="Actions">
-                                <button class="btn-action btn-edit">Edit</button>
-                                <button class="btn-action btn-delete">Delete</button>
-                            </td>
-                        </tr>
-                        
-                        <!-- Sample Client 2 -->
-                        <tr>
-                            <td data-label="Name">Sarah Johnson</td>
-                            <td data-label="Email">sarah.j@email.com</td>
-                            <td data-label="Phone">(555) 234-5678</td>
-                            <td data-label="Fitness Goal">Muscle Gain</td>
-                            <td data-label="Start Date">2025-02-01</td>
-                            <td data-label="Actions">
-                                <button class="btn-action btn-edit">Edit</button>
-                                <button class="btn-action btn-delete">Delete</button>
-                            </td>
-                        </tr>
-                        
-                        <!-- Sample Client 3 -->
-                        <tr>
-                            <td data-label="Name">Michael Brown</td>
-                            <td data-label="Email">m.brown@email.com</td>
-                            <td data-label="Phone">(555) 345-6789</td>
-                            <td data-label="Fitness Goal">General Fitness</td>
-                            <td data-label="Start Date">2025-03-10</td>
-                            <td data-label="Actions">
-                                <button class="btn-action btn-edit">Edit</button>
-                                <button class="btn-action btn-delete">Delete</button>
-                            </td>
-                        </tr>
-                        
-                        <!-- Sample Client 4 -->
-                        <tr>
-                            <td data-label="Name">Emily Davis</td>
-                            <td data-label="Email">emily.davis@email.com</td>
-                            <td data-label="Phone">(555) 456-7890</td>
-                            <td data-label="Fitness Goal">Endurance Training</td>
-                            <td data-label="Start Date">2025-04-05</td>
-                            <td data-label="Actions">
-                                <button class="btn-action btn-edit">Edit</button>
-                                <button class="btn-action btn-delete">Delete</button>
-                            </td>
-                        </tr>
-                        
-                        <!-- Sample Client 5 -->
-                        <tr>
-                            <td data-label="Name">David Wilson</td>
-                            <td data-label="Email">david.w@email.com</td>
-                            <td data-label="Phone">(555) 567-8901</td>
-                            <td data-label="Fitness Goal">Weight Loss</td>
-                            <td data-label="Start Date">2025-05-20</td>
-                            <td data-label="Actions">
-                                <button class="btn-action btn-edit">Edit</button>
-                                <button class="btn-action btn-delete">Delete</button>
-                            </td>
-                        </tr>
-                        
-                        <!-- Sample Client 6 -->
-                        <tr>
-                            <td data-label="Name">Jennifer Martinez</td>
-                            <td data-label="Email">j.martinez@email.com</td>
-                            <td data-label="Phone">(555) 678-9012</td>
-                            <td data-label="Fitness Goal">Flexibility</td>
-                            <td data-label="Start Date">2025-06-12</td>
-                            <td data-label="Actions">
-                                <button class="btn-action btn-edit">Edit</button>
-                                <button class="btn-action btn-delete">Delete</button>
-                            </td>
-                        </tr>
-                        
-                        <!-- Sample Client 7 -->
-                        <tr>
-                            <td data-label="Name">Robert Anderson</td>
-                            <td data-label="Email">robert.a@email.com</td>
-                            <td data-label="Phone">(555) 789-0123</td>
-                            <td data-label="Fitness Goal">Muscle Gain</td>
-                            <td data-label="Start Date">2025-07-08</td>
-                            <td data-label="Actions">
-                                <button class="btn-action btn-edit">Edit</button>
-                                <button class="btn-action btn-delete">Delete</button>
-                            </td>
-                        </tr>
-                        
-                        <!-- Sample Client 8 -->
-                        <tr>
-                            <td data-label="Name">Lisa Taylor</td>
-                            <td data-label="Email">lisa.taylor@email.com</td>
-                            <td data-label="Phone">(555) 890-1234</td>
-                            <td data-label="Fitness Goal">Rehabilitation</td>
-                            <td data-label="Start Date">2025-08-15</td>
-                            <td data-label="Actions">
-                                <button class="btn-action btn-edit">Edit</button>
-                                <button class="btn-action btn-delete">Delete</button>
-                            </td>
-                        </tr>
-                        
-                        <!-- Sample Client 9 -->
-                        <tr>
-                            <td data-label="Name">Christopher Lee</td>
-                            <td data-label="Email">chris.lee@email.com</td>
-                            <td data-label="Phone">(555) 901-2345</td>
-                            <td data-label="Fitness Goal">General Fitness</td>
-                            <td data-label="Start Date">2025-09-01</td>
-                            <td data-label="Actions">
-                                <button class="btn-action btn-edit">Edit</button>
-                                <button class="btn-action btn-delete">Delete</button>
-                            </td>
-                        </tr>
-                        
-                        <!-- Sample Client 10 -->
-                        <tr>
-                            <td data-label="Name">Amanda White</td>
-                            <td data-label="Email">amanda.white@email.com</td>
-                            <td data-label="Phone">(555) 012-3456</td>
-                            <td data-label="Fitness Goal">Weight Loss</td>
-                            <td data-label="Start Date">2025-10-10</td>
-                            <td data-label="Actions">
-                                <button class="btn-action btn-edit">Edit</button>
-                                <button class="btn-action btn-delete">Delete</button>
+                            <td colspan="6" style="text-align: center; padding: 2rem;">
+                                Loading clients...
                             </td>
                         </tr>
                     </tbody>
@@ -189,5 +69,9 @@
             <p>&copy; 2025 ClientLift. Simple Client Management for Fitness Professionals.</p>
         </div>
     </footer>
+
+    <!-- Include main.js -->
+    <script src="js/main.js"></script>
 </body>
+
 </html>

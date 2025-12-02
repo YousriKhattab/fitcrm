@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClientLift - Add New Client</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">ClientLift</h1>
+            <ul class="nav-links">
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="clients.html">Client List</a></li>
+                <li><a href="add-client.html" class="active">Add Client</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="form-container">
+            <div class="form-header">
+                <h2>Add New Client</h2>
+                <p class="subtitle">Fill out the form below to register a new client</p>
+            </div>
+
+            <form id="clientForm" class="client-form">
+                <!-- Full Name -->
+                <div class="form-group">
+                    <label for="fullName">Full Name *</label>
+                    <input type="text" id="fullName" name="fullName" placeholder="Enter client's full name" required>
+                    <span class="error-message" id="fullNameError"></span>
+                </div>
+
+                <!-- Age -->
+                <div class="form-group">
+                    <label for="age">Age *</label>
+                    <input type="number" id="age" name="age" placeholder="Enter age (1-120)" required>
+                    <span class="error-message" id="ageError"></span>
+                </div>
+
+                <!-- Gender -->
+                <div class="form-group">
+                    <label for="gender">Gender *</label>
+                    <select id="gender" name="gender" required>
+                        <option value="">Select gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                        <option value="prefer-not-to-say">Prefer not to say</option>
+                    </select>
+                    <span class="error-message" id="genderError"></span>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" placeholder="client@example.com" required>
+                    <span class="error-message" id="emailError"></span>
+                </div>
+
+                <!-- Phone -->
+                <div class="form-group">
+                    <label for="phone">Phone *</label>
+                    <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" required>
+                    <span class="error-message" id="phoneError"></span>
+                </div>
+
+                <!-- Fitness Goal -->
+                <div class="form-group">
+                    <label for="fitnessGoal">Fitness Goal *</label>
+                    <select id="fitnessGoal" name="fitnessGoal" required>
+                        <option value="">Select fitness goal</option>
+                        <option value="weight-loss">Weight Loss</option>
+                        <option value="muscle-gain">Muscle Gain</option>
+                        <option value="general-fitness">General Fitness</option>
+                        <option value="endurance">Endurance Training</option>
+                        <option value="flexibility">Flexibility</option>
+                        <option value="rehabilitation">Rehabilitation</option>
+                    </select>
+                    <span class="error-message" id="fitnessGoalError"></span>
+                </div>
+
+                <!-- Membership Start Date -->
+                <div class="form-group">
+                    <label for="startDate">Membership Start Date *</label>
+                    <input type="date" id="startDate" name="startDate" required>
+                    <span class="error-message" id="startDateError"></span>
+                </div>
+
+                <!-- Success Message -->
+                <div id="successMessage" class="success-message" style="display: none;"></div>
+
+                <!-- Submit Buttons -->
+                <div class="form-buttons">
+                    <button type="submit" class="btn btn-primary">Add Client</button>
+                    <button type="reset" class="btn btn-secondary">Clear Form</button>
+                    <a href="index.html" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 ClientLift. Simple Client Management for Fitness Professionals.</p>
+        </div>
+    </footer>
+
+
+    <!-- Include main.js -->
+    <script src="js/main.js"></script>
+
+    <script>
+        // Form validation and submission
+        const form = document.getElementById('clientForm');
+
+        // Validation functions (keep existing validation logic)
+        function validateFullName(name) {
+            if (!name || name.trim().length < 2) {
+                return 'Full name must be at least 2 characters long';
+            }
+            return '';
+        }
+
+        function validateAge(age) {
+            const ageNum = parseInt(age);
+            if (!age || isNaN(ageNum)) {
+                return 'Age is required';
+            }
+            if (ageNum <= 0) {
+                return 'Age must be greater than 0';
+            }
+            if (ageNum > 120) {
+                return 'Age must be 120 or less';
+            }
+            return '';
+        }
+
+        function validateEmail(email) {
+            if (!email) {
+                return 'Email is required';
+            }
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                return 'Please enter a valid email address (e.g., user@example.com)';
+            }
+            return '';
+        }
+
+        function validatePhone(phone) {
+            if (!phone) {
+                return 'Phone number is required';
+            }
+            const phoneRegex = /^\(\d{3}\)\s\d{3}-\d{4}$/;
+            if (!phoneRegex.test(phone)) {
+                return 'Please enter phone in format: (555) 123-4567';
+            }
+            return '';
+        }
+
+        function validateGender(gender) {
+            if (!gender) {
+                return 'Please select a gender';
+            }
+            return '';
+        }
+
+        function validateFitnessGoal(goal) {
+            if (!goal) {
+                return 'Please select a fitness goal';
+            }
+            return '';
+        }
+
+        function validateStartDate(date) {
+            if (!date) {
+                return 'Start date is required';
+            }
+            const selectedDate = new Date(date);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            if (selectedDate > today) {
+                return 'Start date cannot be in the future';
+            }
+            return '';
+        }
+
+        // Show error message
+        function showError(fieldId, message) {
+            const errorElement = document.getElementById(fieldId + 'Error');
+            const inputElement = document.getElementById(fieldId);
+
+            errorElement.textContent = message;
+            if (message) {
+                inputElement.classList.add('input-error');
+            } else {
+                inputElement.classList.remove('input-error');
+            }
+        }
+
+        // Clear all errors
+        function clearErrors() {
+            const errorMessages = document.querySelectorAll('.error-message');
+            errorMessages.forEach(error => error.textContent = '');
+
+            const inputs = document.querySelectorAll('.input-error');
+            inputs.forEach(input => input.classList.remove('input-error'));
+        }
+
+        // Real-time validation on blur
+        document.getElementById('fullName').addEventListener('blur', function () {
+            showError('fullName', validateFullName(this.value));
+        });
+
+        document.getElementById('age').addEventListener('blur', function () {
+            showError('age', validateAge(this.value));
+        });
+
+        document.getElementById('email').addEventListener('blur', function () {
+            showError('email', validateEmail(this.value));
+        });
+
+        document.getElementById('phone').addEventListener('blur', function () {
+            showError('phone', validatePhone(this.value));
+        });
+
+        document.getElementById('gender').addEventListener('change', function () {
+            showError('gender', validateGender(this.value));
+        });
+
+        document.getElementById('fitnessGoal').addEventListener('change', function () {
+            showError('fitnessGoal', validateFitnessGoal(this.value));
+        });
+
+        document.getElementById('startDate').addEventListener('blur', function () {
+            showError('startDate', validateStartDate(this.value));
+        });
+
+        // Form submission
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Clear previous errors
+            clearErrors();
+            document.getElementById('successMessage').style.display = 'none';
+
+            // Get form values
+            const fullName = document.getElementById('fullName').value;
+            const age = document.getElementById('age').value;
+            const gender = document.getElementById('gender').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const fitnessGoal = document.getElementById('fitnessGoal').value;
+            const startDate = document.getElementById('startDate').value;
+
+            // Validate all fields
+            let hasErrors = false;
+
+            const nameError = validateFullName(fullName);
+            if (nameError) {
+                showError('fullName', nameError);
+                hasErrors = true;
+            }
+
+            const ageError = validateAge(age);
+            if (ageError) {
+                showError('age', ageError);
+                hasErrors = true;
+            }
+
+            const genderError = validateGender(gender);
+            if (genderError) {
+                showError('gender', genderError);
+                hasErrors = true;
+            }
+
+            const emailError = validateEmail(email);
+            if (emailError) {
+                showError('email', emailError);
+                hasErrors = true;
+            }
+
+            const phoneError = validatePhone(phone);
+            if (phoneError) {
+                showError('phone', phoneError);
+                hasErrors = true;
+            }
+
+            const goalError = validateFitnessGoal(fitnessGoal);
+            if (goalError) {
+                showError('fitnessGoal', goalError);
+                hasErrors = true;
+            }
+
+            const dateError = validateStartDate(startDate);
+            if (dateError) {
+                showError('startDate', dateError);
+                hasErrors = true;
+            }
+
+            // If no errors, save to localStorage
+            if (!hasErrors) {
+                try {
+                    // Create client object
+                    const clientData = {
+                        fullName,
+                        age: parseInt(age),
+                        gender,
+                        email,
+                        phone,
+                        fitnessGoal,
+                        startDate
+                    };
+
+                    // Save to localStorage using main.js function
+                    const savedClient = saveClient(clientData);
+
+                    // Show success message
+                    const successMsg = document.getElementById('successMessage');
+                    successMsg.textContent = `✓ Client "${fullName}" has been successfully added!`;
+                    successMsg.style.display = 'block';
+
+                    // Show notification
+                    showNotification(`${fullName} has been added successfully!`, 'success');
+
+                    // Redirect to client list after 1 second
+                    setTimeout(() => {
+                        window.location.href = 'clients.html';
+                    }, 1000);
+
+                } catch (error) {
+                    console.error('Error saving client:', error);
+                    showNotification('Failed to save client. Please try again.', 'error');
+                }
+            } else {
+                // Scroll to first error
+                const firstError = document.querySelector('.input-error');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        });
+
+        // Clear errors on form reset
+        form.addEventListener('reset', function () {
+            clearErrors();
+            document.getElementById('successMessage').style.display = 'none';
+        });
+    </script>
+</body>
+
+</html>
